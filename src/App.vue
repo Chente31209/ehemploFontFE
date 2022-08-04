@@ -55,11 +55,11 @@ export default {
   },
   methods:{
     btnEncriprar(){
-      this.Epassword=this.$CryptoJS.AES.encrypt(this.password, "PaoabraSeceta",{ iv: this.password }).toString()
-      console.log(this.Epassword )
+      
       
       this.$http.get(this.url+"Certificados/GetKeyToUploadCertificate?rfc="+this.rfc).then((response) => {
-        
+        this.Epassword=this.$CryptoJS.AES.encrypt(this.password, response.data,{ iv: this.password }).toString()
+        console.log(this.Epassword )
         this.pkey = document.getElementById("key").files[0]
         this.pcer = document.getElementById("cer").files[0]
         
